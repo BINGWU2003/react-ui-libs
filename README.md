@@ -1,13 +1,44 @@
 # react-ui-libs
 
-Compare popular React UI libraries by styling, accessibility, component coverage,
-and package or source distribution. Pick the right UI library for your React or
-Next.js project.
+Find the right UI library for your **React or Next.js project**. Compare 18 popular
+libraries by styling, accessibility, component coverage, and how you install and
+customize them.
 
-[Visit the website](https://react-ui-libs.vercel.app/) ·
-[GitHub repository](https://github.com/BINGWU2003/react-ui-libs)
+[**Try the picker →**](https://react-ui-libs.vercel.app/) ·
+[Included libraries](#included-libraries) ·
+[Local development](#local-development)
 
-![react-ui-libs social preview](public/img/social.png)
+## Preview
+
+[▶ Watch react-ui-libs-promo](docs/media/react-ui-libs-promo.mp4)
+
+A quick tour of the catalog and filters. Open the video to play the full promo
+with audio.
+
+## What you can compare
+
+- **Styling and distribution** — styled or unstyled components, npm packages or
+  source code you add to your project, and Tailwind CSS support.
+- **Project requirements** — accessibility, dark mode, themes, RTL support,
+  TypeScript, Figma resources, and form helpers.
+- **Component coverage** — browse available and missing component categories for
+  each library.
+- **Activity metrics** — filter by GitHub stars and weekly npm downloads, with
+  source and availability caveats explained below.
+
+## How to use
+
+1. Hover a feature to read its definition, then select the features you need.
+   All selected features must match. Styled/Unstyled and Package/Paste are
+   mutually exclusive pairs; libraries supporting both styling modes can match
+   either.
+2. Set minimum GitHub stars, weekly npm downloads, or matched component categories
+   with the range controls.
+3. Open a library's component drawer to inspect its coverage, then follow its
+   official website link to evaluate the APIs and documentation.
+
+Clear the filters to start over. On smaller screens, use the menu button to open
+the filter sidebar.
 
 ## Included libraries
 
@@ -36,16 +67,7 @@ This is a curated selection of web UI libraries, not a complete list of the Reac
 ecosystem. Standalone charting, table, form, animation, and React Native libraries
 are outside this catalog.
 
-## Using the picker
-
-- Hover a feature to read its definition, then select features to filter libraries.
-- Multiple selected features must all match. Styled/Unstyled and Package/Copy & Paste are mutually exclusive filter selections. A library supporting both styling modes can match either.
-- Use the range controls to set minimum repository stars, weekly npm downloads,
-  or matched component categories. Clear the filters to reset the list.
-- Open a library's component drawer to see available and missing categories.
-- On smaller screens, open the filter sidebar using the menu button.
-
-### How to interpret the data
+## How to interpret the data
 
 Component counts represent categories in this catalog, **not the total number of
 components or exports advertised by a library**. Equivalent names are normalized,
@@ -62,23 +84,28 @@ kits, and support may still cost money.
 of every component or application. Unstyled libraries still require appropriate
 styling and integration. Figma resources may be paid separately.
 
-Repository stars load through a same-origin endpoint, with an hourly server cache
+**Stars and downloads** are signals, not directly comparable usage rankings.
+Stars may cover an entire monorepo; downloads refer to the one named npm package.
+For shadcn/ui, the [`shadcn` package](https://www.npmjs.com/package/shadcn) measures
+CLI downloads, not component installs, and is used by the download filter.
+Unavailable metrics stay hidden and do not pass an active metric filter; a zero
+threshold keeps those libraries visible.
+
+<details>
+<summary>How metrics are loaded</summary>
+
+Repository stars load through a same-origin endpoint with an hourly server cache
 shared across visitors. If the GitHub API is unavailable or rate-limited, the
 server reads the exact star count from the official GitHub repository page.
 The stars slider shows a loading or error state until data is available.
 Weekly npm downloads load in the browser from npm.
-Stars may cover an entire monorepo, including other products or frameworks.
-Downloads refer to the one named package, not all packages in its ecosystem.
-For shadcn/ui, downloads come from the [`shadcn` npm package](https://www.npmjs.com/package/shadcn)
-and measure CLI downloads, not component installs. They are displayed and used by
-the download filter. These metrics are not directly comparable usage rankings.
-Unavailable metrics stay hidden and do not pass an active metric filter. A zero
-threshold leaves libraries visible even when the API is unavailable.
+
+</details>
 
 Catalog reviewed on **2026-10-29**. Libraries change; verify important requirements
 against their official documentation before choosing one.
 
-## Development
+## Local development
 
 The website itself uses **Nuxt 3, Vue, Nuxt UI, and Tailwind CSS**. React libraries
 are catalog entries with links and metadata; they are not installed or rendered
@@ -93,13 +120,14 @@ npm run dev
 
 The development server normally runs at `http://localhost:3000`.
 
-```sh
-npm test
-npm run build
-npm run preview
-```
+| Command           | Purpose                      |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | Start the development server |
+| `npm test`        | Run the test suite           |
+| `npm run build`   | Build for production         |
+| `npm run preview` | Preview the production build |
 
-### Site URL and Vercel
+### Deployment URL
 
 The production site is [react-ui-libs.vercel.app](https://react-ui-libs.vercel.app/).
 The Nuxt configuration uses this URL by default. Set `NUXT_PUBLIC_SITE_URL` in a
@@ -111,12 +139,16 @@ metadata. The project includes no advertising or analytics scripts.
 
 ## Contributing
 
-Update `data/libraries.ts` for library metadata and component coverage,
-`data/filters.ts` for feature definitions, and `data/sections.ts` for the shared
-component taxonomy. Use official documentation as the source, avoid duplicate
-component mappings, and do not infer library support merely from a third-party
-example. Store logos locally in `public/img/`; source references are listed in
-that directory's README.
+| File                                     | What to update                          |
+| ---------------------------------------- | --------------------------------------- |
+| [`data/libraries.ts`](data/libraries.ts) | Library metadata and component coverage |
+| [`data/filters.ts`](data/filters.ts)     | Feature definitions                     |
+| [`data/sections.ts`](data/sections.ts)   | Shared component categories             |
+| [`public/img/`](public/img/)             | Local logos and source references       |
+
+Use official documentation as the source, avoid duplicate component mappings, and
+do not infer library support merely from a third-party example. Record logo
+sources in [`public/img/README.md`](public/img/README.md).
 
 Run `npm test` and `npm run build` before submitting changes.
 
