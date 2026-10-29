@@ -10,9 +10,9 @@ customize them.
 
 ## Preview
 
-[▶ Watch react-ui-libs-promo](https://bing-wu-doc-1318477772.cos.ap-nanjing.myqcloud.com/typora/react-ui-libs-promo.mp4)
+https://github.com/user-attachments/assets/b16b709c-63b6-4fd2-a7cc-a04c953e0634
 
-A quick tour of the catalog and filters. Open the video to play the full promo
+A quick tour of the catalog and filters. Play the video above for the full promo
 with audio.
 
 ## What you can compare
