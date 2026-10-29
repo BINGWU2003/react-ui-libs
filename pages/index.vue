@@ -54,7 +54,7 @@ useHead({
     {
       rel: "icon",
       type: "image/svg+xml",
-      href: "/favicon/react.svg",
+      href: "/favicon/cube-transparent.svg",
     },
     ...(siteUrl ? [{ rel: "canonical", href: `${siteUrl}/` }] : []),
   ],

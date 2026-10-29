@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="mb-8 flex items-center gap-3">
-      <img
-        :src="`/img/${logo}`"
-        :alt="`${library.name} logo`"
-        class="mt-2 h-10 w-10 object-contain drop-shadow-lg"
-      />
+      <LibraryLogo :library="library" class="mt-2 h-10 w-10" />
       <h2 class="decorated text-xl font-semibold md:text-2xl">
         {{ library.name }} components
       </h2>
@@ -65,13 +61,6 @@ import type { Library } from "@/types/libraries.types"
 import type { Component } from "@/types/components.types"
 
 const props = defineProps<{ library: Library }>()
-const colorMode = useColorMode()
-const logo = computed(() =>
-  colorMode.value === "dark" && props.library.logoDark
-    ? props.library.logoDark
-    : props.library.logo
-)
-
 const isFound = (component: Component): boolean =>
   props.library.componentMatchings.includes(component.name)
 

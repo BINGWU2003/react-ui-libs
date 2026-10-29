@@ -19,11 +19,7 @@
               target="_blank"
             >
               <div class="w-full">
-                <img
-                  :src="`/img/${logo}`"
-                  :alt="`${library.name} logo`"
-                  class="h-12 w-12 object-contain drop-shadow-lg"
-                />
+                <LibraryLogo :library="library" class="h-12 w-12" />
               </div>
               <p class="font-medium tracking-wide">{{ library.name }}</p>
             </UButton>
@@ -109,7 +105,6 @@ const props = defineProps<{
 
 const library = ref({ ...props.initialLibrary })
 const isComponentPanelOpen = ref(false)
-const colorMode = useColorMode()
 const nbComponents = library.value.componentMatchings.length
 
 const buttonFiltersToShow = computed((): ButtonFilter[] => {
@@ -131,12 +126,6 @@ const display = computed((): boolean => {
     components: rangeFiltering.value.FNbComponents.qty,
   })
 })
-
-const logo = computed((): string =>
-  colorMode.value == "dark" && library.value.logoDark
-    ? library.value.logoDark
-    : library.value.logo
-)
 
 // Github related ------------------------------------------------------------------------
 
