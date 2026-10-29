@@ -910,6 +910,7 @@ export const libraries: Array<Library> = [
     // https://react-aria.adobe.com/ — Components, not the hooks-only react-aria package.
     name: "React Aria Components",
     logo: "react-aria.svg",
+    logoDark: "react-aria-dark.svg",
     url: "https://react-aria.adobe.com",
     repoOwner: "adobe",
     repoName: "react-spectrum",

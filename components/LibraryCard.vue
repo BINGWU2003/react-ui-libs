@@ -10,7 +10,7 @@
         <div class="shrink-0">
           <UTooltip :text="`Go to ${library.name} website`">
             <UButton
-              class="flex flex-col gap-3"
+              class="flex flex-col gap-3 hover:bg-transparent"
               variant="ghost"
               :padded="false"
               color="primary"
