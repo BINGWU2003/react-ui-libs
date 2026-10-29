@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="display"
-    class="min-h-[180px] w-auto rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-800"
+    class="min-h-[180px] w-auto rounded-lg border border-shadcn-border bg-shadcn-card"
   >
     <div class="flex h-full flex-col justify-between">
       <LibraryCardPromo v-if="library.promo" :promo="library.promo" />
@@ -13,7 +13,7 @@
               class="flex flex-col gap-3"
               variant="ghost"
               :padded="false"
-              color="black"
+              color="primary"
               size="xl"
               :to="library.url"
               target="_blank"

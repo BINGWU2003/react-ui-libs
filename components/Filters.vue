@@ -1,7 +1,7 @@
 <template>
   <UAccordion
     :items="accordionSections"
-    color="black"
+    color="primary"
     size="xl"
     variant="ghost"
     :multiple="true"

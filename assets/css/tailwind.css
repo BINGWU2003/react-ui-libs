@@ -4,6 +4,30 @@
 
 /* The base layer is for things like reset rules or default styles applied to plain HTML elements. */
 @layer base {
+  :root {
+    --shadcn-background: 255 255 255;
+    --shadcn-foreground: 10 10 10;
+    --shadcn-card: var(--shadcn-background);
+    --shadcn-primary: 23 23 23;
+    --shadcn-primary-foreground: 250 250 250;
+    --shadcn-muted: 245 245 245;
+    --shadcn-muted-foreground: 115 115 115;
+    --shadcn-accent: var(--shadcn-muted);
+    --shadcn-border: 229 229 229;
+    --shadcn-ring: 163 163 163;
+  }
+
+  .dark {
+    --shadcn-background: 10 10 10;
+    --shadcn-foreground: 250 250 250;
+    --shadcn-primary: 250 250 250;
+    --shadcn-primary-foreground: 23 23 23;
+    --shadcn-muted: 38 38 38;
+    --shadcn-muted-foreground: 163 163 163;
+    --shadcn-border: 38 38 38;
+    --shadcn-ring: 115 115 115;
+  }
+
   @font-face {
     font-family: "Roobert";
     font-style: normal;
@@ -38,8 +62,12 @@
   #__nuxt,
   #__layout {
     @apply min-h-screen w-full;
-    @apply bg-gray-50 dark:bg-gray-900;
+    @apply bg-shadcn-background text-shadcn-foreground;
     @apply font-roobert;
+  }
+
+  * {
+    @apply border-shadcn-border;
   }
 
   div,
@@ -52,6 +80,14 @@
     @apply focus:outline-none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
+
+  a:focus-visible {
+    @apply outline-none ring-2 ring-shadcn-ring ring-offset-2 ring-offset-shadcn-background;
+  }
+
+  ::selection {
+    @apply bg-shadcn-primary/20 text-shadcn-foreground;
+  }
 }
 
 /* The components layer is for class-based styles that you want to be able to override with utilities. */
@@ -61,14 +97,14 @@
 /* The utilities layer is for small, single-purpose classes that should always take precedence over any other styles. */
 @layer utilities {
   .primary-text {
-    @apply text-primary-500 dark:text-primary-400;
+    @apply text-shadcn-primary;
   }
 
   .primary-text-muted {
-    @apply text-gray-500 dark:text-gray-400;
+    @apply text-shadcn-muted-foreground;
   }
 
   .decorated {
-    @apply decoration-primary-500 dark:decoration-primary-400 underline underline-offset-8;
+    @apply underline decoration-shadcn-primary underline-offset-8;
   }
 }

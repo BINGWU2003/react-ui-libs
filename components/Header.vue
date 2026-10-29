@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-sm shadow-gray-200 backdrop-blur-md dark:shadow-gray-600">
+  <div class="border-b border-shadcn-border bg-shadcn-background/95 backdrop-blur-md">
     <div class="flex items-center justify-between px-4 py-2 md:px-8">
       <div class="hidden h-12 items-center gap-2 md:flex">
         <img class="size-8" src="/favicon/react.svg" alt="react-ui-libs" />

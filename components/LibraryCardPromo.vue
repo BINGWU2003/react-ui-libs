@@ -1,7 +1,7 @@
 <template>
   <div>
     <a
-      class="bg-primary-500 dark:bg-primary-400 flex h-7 items-center justify-between rounded-t-md px-2 text-sm font-bold text-white dark:text-black"
+      class="flex h-7 items-center justify-between rounded-t-md bg-shadcn-primary px-2 text-sm font-bold text-shadcn-primary-foreground hover:bg-shadcn-primary/90"
       :href="promo.url"
       target="_blank"
       rel="noopener noreferrer"
