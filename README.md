@@ -10,7 +10,7 @@ customize them.
 
 ## Preview
 
-[▶ Watch react-ui-libs-promo](docs/media/react-ui-libs-promo.mp4)
+[▶ Watch react-ui-libs-promo](https://bing-wu-doc-1318477772.cos.ap-nanjing.myqcloud.com/typora/react-ui-libs-promo.mp4)
 
 A quick tour of the catalog and filters. Open the video to play the full promo
 with audio.
