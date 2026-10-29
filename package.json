@@ -1,11 +1,12 @@
 {
-  "name": "ui-libs",
+  "name": "react-ui-libs",
   "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --no-fork",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {

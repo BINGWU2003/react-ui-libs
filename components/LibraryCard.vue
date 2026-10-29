@@ -19,7 +19,11 @@
               target="_blank"
             >
               <div class="w-full">
-                <img :src="`/img/${logo}`" :alt="logo" class="h-12 w-12 drop-shadow-lg" />
+                <img
+                  :src="`/img/${logo}`"
+                  :alt="`${library.name} logo`"
+                  class="h-12 w-12 object-contain drop-shadow-lg"
+                />
               </div>
               <p class="font-medium tracking-wide">{{ library.name }}</p>
             </UButton>
@@ -40,7 +44,10 @@
       <!-- Card footer -->
       <div class="mt-4 flex items-center justify-between">
         <div class="ml-1 flex">
-          <UTooltip v-if="repoUrl && library.nbStars" text="Go to github.com page">
+          <UTooltip
+            v-if="repoUrl && library.nbStars !== undefined"
+            :text="`Repository stars: ${library.repoOwner}/${library.repoName}. Monorepo totals may include other packages.`"
+          >
             <UButton
               icon="i-mdi-star-outline"
               :label="getDisplayableNumber(library.nbStars)"
@@ -50,7 +57,10 @@
               color="gray"
             />
           </UTooltip>
-          <UTooltip v-if="registryUrl && library.nbDownloads" text="Go to npmjs.com page">
+          <UTooltip
+            v-if="registryUrl && library.nbDownloads !== undefined"
+            :text="`Weekly npm downloads: ${library.package}. ${library.packageNote || 'Other packages are not included.'}`"
+          >
             <UButton
               icon="i-material-symbols-download"
               :label="getDisplayableNumber(library.nbDownloads)"
@@ -97,8 +107,7 @@ const props = defineProps<{
   initialLibrary: Library
 }>()
 
-// required to mutate a prop
-const library = ref(props.initialLibrary)
+const library = ref({ ...props.initialLibrary })
 const isComponentPanelOpen = ref(false)
 const colorMode = useColorMode()
 const nbComponents = library.value.componentMatchings.length
@@ -115,43 +124,19 @@ const buttonFiltersToShow = computed((): ButtonFilter[] => {
 })
 
 const display = computed((): boolean => {
-  /* Return true if this card should be displayed */
   const { touchedButtonFilterIDs, rangeFiltering } = useFilterStore()
-  const libraryFilterIDs = library.value.filterMatchings.map((obj) => obj.id)
-
-  // Check wether all the button logic is satisfied, and debranch if not
-  if (isSubset(touchedButtonFilterIDs(), libraryFilterIDs) == false) {
-    return false
-  }
-
-  // ... Now range logic must be verified too.
-  // We need to check every range filters living in the state
-  if (
-    rangeFiltering.value.FNbStars.qty > 0 &&
-    library.value.nbStars! < rangeFiltering.value.FNbStars.qty
-  ) {
-    return false
-  }
-  if (
-    rangeFiltering.value.FNbDownloads.qty > 0 &&
-    library.value.nbDownloads! < rangeFiltering.value.FNbDownloads.qty * 1000
-  ) {
-    return false
-  }
-  if (
-    rangeFiltering.value.FNbComponents.qty > 0 &&
-    nbComponents < rangeFiltering.value.FNbComponents.qty
-  ) {
-    return false
-  }
-
-  return true
+  return matchesLibraryFilters(library.value, touchedButtonFilterIDs(), {
+    stars: rangeFiltering.value.FNbStars.qty,
+    weeklyDownloads: rangeFiltering.value.FNbDownloads.qty * 1000,
+    components: rangeFiltering.value.FNbComponents.qty,
+  })
 })
 
-const logo = ((): string =>
+const logo = computed((): string =>
   colorMode.value == "dark" && library.value.logoDark
     ? library.value.logoDark
-    : library.value.logo)()
+    : library.value.logo
+)
 
 // Github related ------------------------------------------------------------------------
 
@@ -166,13 +151,18 @@ type GithubApiResponse = {
 }
 
 if (repoUrl) {
-  const { data: githubApiData } = useFetch<GithubApiResponse>(
+  useFetch<GithubApiResponse>(
     `https://api.github.com/repos/${library.value.repoOwner}/${library.value.repoName}`,
     {
       lazy: true,
       server: false, // This call will only be performed on the client
       onResponse({ response }) {
-        library.value.nbStars = response._data.stargazers_count
+        library.value.nbStars = response.ok
+          ? getValidMetric(response._data?.stargazers_count)
+          : undefined
+      },
+      onRequestError() {
+        library.value.nbStars = undefined
       },
     }
   )
@@ -191,13 +181,18 @@ type NpmApiResponse = {
 }
 
 if (registryUrl) {
-  const { data: npmApiData } = useFetch<NpmApiResponse>(
-    `https://api.npmjs.org/downloads/point/last-week/${library.value.package}`,
+  useFetch<NpmApiResponse>(
+    `https://api.npmjs.org/downloads/point/last-week/${encodeURIComponent(library.value.package!)}`,
     {
       lazy: true,
       server: false,
       onResponse({ response }) {
-        library.value.nbDownloads = response._data.downloads
+        library.value.nbDownloads = response.ok
+          ? getValidMetric(response._data?.downloads)
+          : undefined
+      },
+      onRequestError() {
+        library.value.nbDownloads = undefined
       },
     }
   )

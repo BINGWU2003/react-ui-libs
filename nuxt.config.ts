@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      loadPlausible: "", // overrided by env,
+      siteUrl: "https://react-ui-libs.vercel.app",
     },
   },
   typescript: {

@@ -1,9 +1,7 @@
 {
-  "name": "🎨 ui-libs",
+  "name": "react-ui-libs",
   "image": "node:22-bookworm",
-  "forwardPorts": [
-    3000
-  ],
+  "forwardPorts": [3000],
   "portsAttributes": {
     "3000": {
       "label": "Nuxt",

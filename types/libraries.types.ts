@@ -16,6 +16,7 @@ export type Library = {
   repoOwner?: string
   repoName?: string
   package?: string
+  packageNote?: string // context for interpreting the named package's download count
   filterMatchings: ButtonFilterMatching[]
   componentMatchings: ComponentName[]
   nbStars?: number // filled later

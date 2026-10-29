@@ -6,6 +6,7 @@
       variant="ghost"
       :icon="icon"
       @click="toggleTheme"
+      :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
     />
   </ClientOnly>
 </template>
@@ -14,17 +15,17 @@
 const colorMode = useColorMode()
 
 const isDark = shallowRef(false)
-const icon = toRef(() => isDark.value ? "i-ph-moon" : "i-ph-sun")
+const icon = toRef(() => (isDark.value ? "i-ph-moon" : "i-ph-sun"))
 
 watchEffect(() => {
-  const prefersDark = !import.meta.server
-    && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const prefersDark =
+    !import.meta.server && window.matchMedia("(prefers-color-scheme: dark)").matches
 
-  isDark.value = colorMode.preference === 'system' && prefersDark
-    || colorMode.preference === 'dark'
+  isDark.value =
+    (colorMode.preference === "system" && prefersDark) || colorMode.preference === "dark"
 })
 
 const toggleTheme = (): void => {
-  colorMode.preference = isDark.value ? 'light' : 'dark'
+  colorMode.preference = isDark.value ? "light" : "dark"
 }
 </script>

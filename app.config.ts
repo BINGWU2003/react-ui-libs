@@ -12,7 +12,6 @@ export default defineAppConfig({
       popper: { placement: "top" },
     },
   },
-  repoUrl: "https://github.com/ddahan/ui-libs",
-  myWebsiteUrl: "https://david-dahan.com",
-  myContactUrl: "https://david-dahan.com/contact",
+  repoUrl: "https://github.com/BINGWU2003/react-ui-libs",
+  myWebsiteUrl: "https://github.com/BINGWU2003",
 })

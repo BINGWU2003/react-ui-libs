@@ -1,70 +1,127 @@
-# UI Lib Picker for Vue 3 / Nuxt 3
+# react-ui-libs
 
-Choosing the right UI library is hard! There are many things to consider. This project is a simple tool to have an overview of different UI frameworks, and help you pick the right one.
+Compare popular React UI libraries by styling, accessibility, component coverage,
+and package or source distribution. Pick the right UI library for your React or
+Next.js project.
 
-[![social preview](https://ui-libs.vercel.app/img/social_small.png)](https://ui-libs.vercel.app/)
+[Visit the website](https://react-ui-libs.vercel.app/) ·
+[GitHub repository](https://github.com/BINGWU2003/react-ui-libs)
 
-### How does it work?
+![react-ui-libs social preview](public/img/social.png)
 
-- Hover features to know about them, and click them to filter libraries which implement it
-- For any library, you can see the detail of available components.
+## Included libraries
 
-## Contributions
+| Library               | Official website                                               | Primary npm package          |
+| --------------------- | -------------------------------------------------------------- | ---------------------------- |
+| Ant Design            | [ant.design](https://ant.design)                               | `antd`                       |
+| MUI                   | [mui.com](https://mui.com/material-ui/)                        | `@mui/material`              |
+| shadcn/ui             | [ui.shadcn.com](https://ui.shadcn.com)                         | `shadcn` (CLI)               |
+| Mantine               | [mantine.dev](https://mantine.dev)                             | `@mantine/core`              |
+| Chakra UI             | [chakra-ui.com](https://chakra-ui.com)                         | `@chakra-ui/react`           |
+| HeroUI                | [heroui.com](https://heroui.com)                               | `@heroui/react`              |
+| PrimeReact            | [primereact.dev](https://primereact.dev)                       | `primereact`                 |
+| React Bootstrap       | [react-bootstrap.github.io](https://react-bootstrap.github.io) | `react-bootstrap`            |
+| Fluent UI             | [react.fluentui.dev](https://react.fluentui.dev)               | `@fluentui/react-components` |
+| Arco Design           | [arco.design](https://arco.design/react/en-US/docs/start)      | `@arco-design/web-react`     |
+| React Suite           | [rsuitejs.com](https://www.rsuitejs.com)                       | `rsuite`                     |
+| Radix Themes          | [radix-ui.com/themes](https://www.radix-ui.com/themes)         | `@radix-ui/themes`           |
+| Flowbite React        | [flowbite-react.com](https://flowbite-react.com)               | `flowbite-react`             |
+| Radix Primitives      | [radix-ui.com/primitives](https://www.radix-ui.com/primitives) | `radix-ui`                   |
+| Headless UI           | [headlessui.com](https://headlessui.com)                       | `@headlessui/react`          |
+| React Aria Components | [react-aria.adobe.com](https://react-aria.adobe.com)           | `react-aria-components`      |
+| Ark UI                | [ark-ui.com](https://ark-ui.com)                               | `@ark-ui/react`              |
+| Base UI               | [base-ui.com](https://base-ui.com)                             | `@base-ui/react`             |
 
-### How to Contribute
+This is a curated selection of web UI libraries, not a complete list of the React
+ecosystem. Standalone charting, table, form, animation, and React Native libraries
+are outside this catalog.
 
-Contributions are very welcome especially because UI libraries change a lot over time. In particular, here are particularly useful contributions:
+## Using the picker
 
-- Editing existing content (new components for an existing UI)
-- Suggesting a new filter
-- Improving the tool itself
+- Hover a feature to read its definition, then select features to filter libraries.
+- Multiple selected features must all match. Styled/Unstyled and Package/Copy & Paste are mutually exclusive filter selections. A library supporting both styling modes can match either.
+- Use the range controls to set minimum repository stars, weekly npm downloads,
+  or matched component categories. Clear the filters to reset the list.
+- Open a library's component drawer to see available and missing categories.
+- On smaller screens, open the filter sidebar using the menu button.
 
-There is no database. To suggest a data update, simply change data into `data/` folder and make a PR.
+### How to interpret the data
 
-### How to setup the project on your own machine
+Component counts represent categories in this catalog, **not the total number of
+components or exports advertised by a library**. Equivalent names are normalized,
+such as Dialog → Modal, Drawer → Slideover, and Switch → Toggle. Official free
+companion packages may be included; paid extensions and third-party examples are
+not counted as built-in components. Consult each library's documentation for exact
+APIs, package requirements, and framework compatibility.
 
-The project itself is a Nuxt 3 project using Nuxt UI and Tailwind CSS.
+**Free Core** means the listed core components can be used commercially without
+revenue or team-size eligibility limits. Premium templates, extensions, design
+kits, and support may still cost money.
 
-This repository is based on a [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers). If you're using VS Code, you can run this project easily on your own machine using the `Clone Repository` command on your IDE.
+**Accessibility** indicates documented accessibility support, not certification
+of every component or application. Unstyled libraries still require appropriate
+styling and integration. Figma resources may be paid separately.
 
-Once installed, run `npm run dev` to start the project.
+Repository stars and weekly npm downloads load in the browser from GitHub and npm.
+Stars may cover an entire monorepo, including other products or frameworks.
+Downloads refer to the one named package, not all packages in its ecosystem.
+For shadcn/ui, downloads come from the [`shadcn` npm package](https://www.npmjs.com/package/shadcn)
+and measure CLI downloads, not component installs. They are displayed and used by
+the download filter. These metrics are not directly comparable usage rankings.
+Unavailable metrics stay hidden and do not pass an active metric filter. A zero
+threshold leaves libraries visible even when the API is unavailable.
 
-## FAQ
+Catalog reviewed on **2026-10-29**. Libraries change; verify important requirements
+against their official documentation before choosing one.
 
-### Why Library X is not listed?
+## Development
 
-This tool is **made to help** people make a choice. A huge list of every single UI libs rather than a currated list may be counterproductive, while I understand it can feel _unfair_ or _frustrating_ that some libraries are absent of this list.
-Besides, adding more libraries increases the maintenance work and the likelihood of having outdated information.
+The website itself uses **Nuxt 3, Vue, Nuxt UI, and Tailwind CSS**. React libraries
+are catalog entries with links and metadata; they are not installed or rendered
+inside the application. No database is required.
 
-Here are some reasons that automatically discard the library to be listed:
+Use Node.js 22.6 or newer. The Dev Container includes Node.js 22.
 
-- It does not support the latest Vue or Nuxt version.
-- It seems unmaintained (e.g., [iView](https://github.com/iview/iview))
-- It looks like more an "in progress" that final work
-- It aims to mirror Android / iOS UIs (e.g., [Ionic Framework](https://ionicframework.com/), [Framework7](https://framework7.io/)).
+```sh
+npm ci
+npm run dev
+```
 
-Here are some (potentially subjective) reasons that could discard the library to be listed:
+The development server normally runs at `http://localhost:3000`.
 
-- It is not popular enough and doesn't bring anything new or useful to the table (specific component or feature, very high quality, ...)
-- Majority of discussions (PR, issues) are not in English.
+```sh
+npm test
+npm run build
+npm run preview
+```
 
-With all that being said, I'm open to discussion and new libraries evaluation, so feel free to open a PR.
+### Site URL and Vercel
 
-### Why Component X is not listed?
+The production site is [react-ui-libs.vercel.app](https://react-ui-libs.vercel.app/).
+The Nuxt configuration uses this URL by default. Set `NUXT_PUBLIC_SITE_URL` in a
+local `.env` file or in Vercel's environment variables to override the canonical
+and social sharing URLs for another deployment. See `.env.example`.
 
-- It's too basic to be relevant (e.g., a Loading Spinner)
-- It's a Group component (e.g., a Button Group)
-- It's mobile only (e.g., Pull To Refresh)
-- It's listed with a different name (libraries don't always use the exact same names for same components)
-- It's a "block" (a composition of different UI components like a Hero or a Nav bar) rather than a component
-- It's a pure utility which could or should live in a collection of utilities like [VueUse](https://vueuse.org/).
-- It's a broad familiy of dedicated components that make sense to have apart (e.g. Charts).
+An explicitly empty or invalid URL omits canonical and absolute OG/Twitter image
+metadata. The project includes no advertising or analytics scripts.
 
-## About me
+## Contributing
 
-I'm David, 36, living in Paris, and <b>available for hire</b>.
-Visit [my website](https://david-dahan.com) to know more about me, or [contact me](https://david-dahan.com/contact).
+Update `data/libraries.ts` for library metadata and component coverage,
+`data/filters.ts` for feature definitions, and `data/sections.ts` for the shared
+component taxonomy. Use official documentation as the source, avoid duplicate
+component mappings, and do not infer library support merely from a third-party
+example. Store logos locally in `public/img/`; source references are listed in
+that directory's README.
 
-### Disclaimer
+Run `npm test` and `npm run build` before submitting changes.
 
-While every effort has been made to ensure the accuracy of the information provided, the author assumes no responsibility for any errors or omissions.
+## Credits and license
+
+Adapted from [David Dahan's UI Lib Picker](https://github.com/ddahan/ui-libs).
+The original project is licensed under MIT; its copyright notice is retained in
+[LICENSE](LICENSE). Library names and logos belong to their respective owners.
+Logo assets retain their upstream licenses and trademark terms.
+
+The catalog is provided as a selection aid. Information may become outdated or
+contain omissions; refer to the official projects for authoritative details.

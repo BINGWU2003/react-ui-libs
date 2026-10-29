@@ -18,11 +18,6 @@
           <FilterButton buttonFilterID="FPasted" />
         </div>
 
-        <div class="grid grid-cols-2 gap-1">
-          <FilterButton buttonFilterID="FComponents" />
-          <FilterButton buttonFilterID="FCSS" />
-        </div>
-
         <FilterButton buttonFilterID="FTailwind" />
         <FilterButton buttonFilterID="FFree" />
       </div>
@@ -36,7 +31,6 @@
         <FilterButton buttonFilterID="FDarkMode" />
         <FilterButton buttonFilterID="FSemanticColors" />
         <FilterButton buttonFilterID="FFigma" />
-        <FilterButton buttonFilterID="FOfficial" />
         <FilterButton buttonFilterID="FRoadmap" />
         <FilterButton buttonFilterID="FRTLSupport" />
         <FilterButton buttonFilterID="FTyped" />
