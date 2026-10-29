@@ -129,8 +129,8 @@ export const rangeFilters = [
   },
   {
     id: "FNbDownloads" as const,
-    leadingLabel: "At least",
-    trailingLabel: "k npm DLs/week",
+    leadingLabel: "≥",
+    trailingLabel: "npm/week",
     icon: "i-material-symbols-download",
     help: "Downloads of the linked npm package in the last week, not the sum of all packages. For shadcn/ui this measures the shadcn CLI, not component installs. Unavailable statistics are excluded when this filter is active.",
     rangeMax: 50000,

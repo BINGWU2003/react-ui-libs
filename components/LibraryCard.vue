@@ -103,7 +103,11 @@ const props = defineProps<{
   initialLibrary: Library
 }>()
 
-const library = ref({ ...props.initialLibrary })
+const nbDownloads = ref(props.initialLibrary.nbDownloads)
+const library = computed(() => ({
+  ...props.initialLibrary,
+  nbDownloads: nbDownloads.value,
+}))
 const isComponentPanelOpen = ref(false)
 const nbComponents = library.value.componentMatchings.length
 
@@ -134,29 +138,6 @@ const repoUrl = ((library: Library): string | undefined =>
     ? `https://github.com/${library.repoOwner}/${library.repoName}`
     : undefined)(library.value)
 
-type GithubApiResponse = {
-  stargazers_count: number // known and useful key
-  [key: string]: unknown // unknown and useless keys
-}
-
-if (repoUrl) {
-  useFetch<GithubApiResponse>(
-    `https://api.github.com/repos/${library.value.repoOwner}/${library.value.repoName}`,
-    {
-      lazy: true,
-      server: false, // This call will only be performed on the client
-      onResponse({ response }) {
-        library.value.nbStars = response.ok
-          ? getValidMetric(response._data?.stargazers_count)
-          : undefined
-      },
-      onRequestError() {
-        library.value.nbStars = undefined
-      },
-    }
-  )
-}
-
 // NPM related ---------------------------------------------------------------------------
 
 const registryUrl = ((library: Library): string | undefined =>
@@ -176,12 +157,12 @@ if (registryUrl) {
       lazy: true,
       server: false,
       onResponse({ response }) {
-        library.value.nbDownloads = response.ok
+        nbDownloads.value = response.ok
           ? getValidMetric(response._data?.downloads)
           : undefined
       },
       onRequestError() {
-        library.value.nbDownloads = undefined
+        nbDownloads.value = undefined
       },
     }
   )

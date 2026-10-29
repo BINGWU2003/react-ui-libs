@@ -5,7 +5,7 @@ import { test } from "node:test"
 import { compileScript, parse } from "@vue/compiler-sfc"
 import { createSSRApp } from "vue"
 import { renderToString } from "vue/server-renderer"
-import { libraries } from "../data/libraries"
+import { libraries } from "../data/libraries.ts"
 
 const source = readFileSync(
   new URL("../components/LibraryLogo.vue", import.meta.url),

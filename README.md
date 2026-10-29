@@ -62,7 +62,11 @@ kits, and support may still cost money.
 of every component or application. Unstyled libraries still require appropriate
 styling and integration. Figma resources may be paid separately.
 
-Repository stars and weekly npm downloads load in the browser from GitHub and npm.
+Repository stars load through a same-origin endpoint, with an hourly server cache
+shared across visitors. If the GitHub API is unavailable or rate-limited, the
+server reads the exact star count from the official GitHub repository page.
+The stars slider shows a loading or error state until data is available.
+Weekly npm downloads load in the browser from npm.
 Stars may cover an entire monorepo, including other products or frameworks.
 Downloads refer to the one named package, not all packages in its ecosystem.
 For shadcn/ui, downloads come from the [`shadcn` npm package](https://www.npmjs.com/package/shadcn)
