@@ -1,7 +1,8 @@
 # Logo sources
 
-All 18 catalog entries were checked against current official websites or official
-repositories on 2026-10-29. Assets are local copies or standalone logomarks extracted
+Catalog logos were checked against current official websites or official
+repositories on 2026-10-29; Semi Design was added and checked on 2026-10-30.
+Assets are local copies or standalone logomarks extracted
 from official artwork. Names, marks, and artwork remain the property of their
 owners and retain upstream license and trademark terms. Dark variants preserve
 official geometry and use a light fill where necessary.
@@ -23,6 +24,7 @@ follows the site's theme toggle instead of the embedded SVG's color-scheme rules
 | `react-bootstrap.svg`                   | [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap/blob/master/www/static/img/logo.svg)                                                                                                               |
 | `fluentui.ico`                          | [Current Fluent UI docs favicon](https://storybooks.fluentui.dev/react/favicon-192.ico)                                                                                                                                 |
 | `arco.ico`                              | [Arco Design website favicon](https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico)                                                                                                               |
+| `semi.svg`                              | [Semi Design official homepage logomark](https://lf9-static.semi.design/obj/semi-tos/images/5c4bb380-3245-11ec-ab65-77a60c02a0b5.svg)                                                                                          |
 | `rsuite.ico`                            | [React Suite](https://github.com/rsuite/rsuite/blob/main/docs/public/favicon.ico)                                                                                                                                       |
 | `radix.svg`, `radix-dark.svg`           | [Radix website favicon](https://www.radix-ui.com/favicon-black.svg)                                                                                                                                                     |
 | `flowbite-react.svg`                    | [Flowbite React](https://github.com/themesberg/flowbite-react/blob/main/apps/web/public/favicon.svg)                                                                                                                    |

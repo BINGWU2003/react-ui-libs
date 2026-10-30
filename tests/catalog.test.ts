@@ -7,9 +7,9 @@ import { sections } from "../data/sections.ts"
 import { getValidMetric, matchesLibraryFilters } from "../utils/libraryMetrics.ts"
 import { getSiteUrl } from "../utils/getSiteUrl.ts"
 
-test("the curated catalog has 18 distinct libraries with valid local assets and references", () => {
-  assert.equal(libraries.length, 18)
-  assert.equal(new Set(libraries.map(({ name }) => name)).size, 18)
+test("the curated catalog has 19 distinct libraries with valid local assets and references", () => {
+  assert.equal(libraries.length, 19)
+  assert.equal(new Set(libraries.map(({ name }) => name)).size, 19)
   const filters = new Set(buttonFilters.map(({ id }) => id))
   const components = new Set(
     sections.flatMap(({ components }) => components.map(({ name }) => name))

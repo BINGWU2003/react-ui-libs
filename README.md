@@ -1,6 +1,6 @@
 # react-ui-libs
 
-Find the right UI library for your **React or Next.js project**. Compare 18 popular
+Find the right UI library for your **React or Next.js project**. Compare 19 popular
 libraries by styling, accessibility, component coverage, and how you install and
 customize them.
 
@@ -54,6 +54,7 @@ the filter sidebar.
 | React Bootstrap       | [react-bootstrap.github.io](https://react-bootstrap.github.io) | `react-bootstrap`            |
 | Fluent UI             | [react.fluentui.dev](https://react.fluentui.dev)               | `@fluentui/react-components` |
 | Arco Design           | [arco.design](https://arco.design/react/en-US/docs/start)      | `@arco-design/web-react`     |
+| Semi Design           | [semi.design](https://semi.design/zh-CN/)                      | `@douyinfe/semi-ui`          |
 | React Suite           | [rsuitejs.com](https://www.rsuitejs.com)                       | `rsuite`                     |
 | Radix Themes          | [radix-ui.com/themes](https://www.radix-ui.com/themes)         | `@radix-ui/themes`           |
 | Flowbite React        | [flowbite-react.com](https://flowbite-react.com)               | `flowbite-react`             |
@@ -102,8 +103,9 @@ Weekly npm downloads load in the browser from npm.
 
 </details>
 
-Catalog reviewed on **2026-10-29**. Libraries change; verify important requirements
-against their official documentation before choosing one.
+Catalog reviewed on **2026-10-29**, with Semi Design added and reviewed on
+**2026-10-30**. Libraries change; verify important requirements against their
+official documentation before choosing one.
 
 ## Local development
 
