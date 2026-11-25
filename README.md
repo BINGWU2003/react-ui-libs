@@ -1,6 +1,6 @@
 # react-ui-libs
 
-Find the right UI library for your **React or Next.js project**. Compare 19 popular
+Find the right UI library for your **React or Next.js project**. Compare 20 popular
 libraries by styling, accessibility, component coverage, and how you install and
 customize them.
 
@@ -30,7 +30,7 @@ with audio.
 
 1. Hover a feature to read its definition, then select the features you need.
    All selected features must match. Styled/Unstyled and Package/Paste are
-   mutually exclusive pairs; libraries supporting both styling modes can match
+   mutually exclusive pairs; libraries supporting both modes in a pair can match
    either.
 2. Set minimum GitHub stars, weekly npm downloads, or matched component categories
    with the range controls.
@@ -58,6 +58,7 @@ the filter sidebar.
 | React Suite           | [rsuitejs.com](https://www.rsuitejs.com)                       | `rsuite`                     |
 | Radix Themes          | [radix-ui.com/themes](https://www.radix-ui.com/themes)         | `@radix-ui/themes`           |
 | Flowbite React        | [flowbite-react.com](https://flowbite-react.com)               | `flowbite-react`             |
+| assistant-ui          | [assistant-ui.com](https://www.assistant-ui.com)               | `@assistant-ui/react`        |
 | Radix Primitives      | [radix-ui.com/primitives](https://www.radix-ui.com/primitives) | `radix-ui`                   |
 | Headless UI           | [headlessui.com](https://headlessui.com)                       | `@headlessui/react`          |
 | React Aria Components | [react-aria.adobe.com](https://react-aria.adobe.com)           | `react-aria-components`      |
@@ -104,8 +105,9 @@ Weekly npm downloads load in the browser from npm.
 </details>
 
 Catalog reviewed on **2026-10-29**, with Semi Design added and reviewed on
-**2026-10-30**. Libraries change; verify important requirements against their
-official documentation before choosing one.
+**2026-10-30**, and assistant-ui added and reviewed on **2026-11-25**. Libraries
+change; verify important requirements against their official documentation before
+choosing one.
 
 ## Local development
 
