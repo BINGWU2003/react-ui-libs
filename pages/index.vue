@@ -59,29 +59,32 @@
 
     <!-- Mobile Filter Drawer -->
     <USlideover
-      v-model="isMobileFiltersOpen"
+      v-model:open="isMobileFiltersOpen"
       side="left"
-      :ui="{ width: 'w-screen max-w-xs' }"
-      class="lg:hidden"
+      title="Filters"
+      description="Filter React UI libraries by architecture, capabilities, components, and popularity"
+      :ui="{ content: 'w-screen max-w-xs' }"
     >
-      <SlideoverContent>
-        <div
-          class="flex items-center justify-between border-b border-geist-border px-5 py-4"
-        >
-          <span class="text-sm font-semibold tracking-tight text-geist-fg">Filters</span>
-          <button
-            type="button"
-            aria-label="Close filters"
-            class="inline-flex size-7 items-center justify-center rounded-md border border-geist-border bg-geist-canvas text-geist-secondary hover:text-geist-fg"
-            @click="isMobileFiltersOpen = false"
+      <template #content>
+        <SlideoverContent>
+          <div
+            class="flex items-center justify-between border-b border-geist-border px-5 py-4"
           >
-            <UIcon name="i-ph-x" class="size-4" />
-          </button>
-        </div>
-        <div class="flex-1 overflow-y-auto px-5 py-4">
-          <Filters />
-        </div>
-      </SlideoverContent>
+            <span class="text-sm font-semibold tracking-tight text-geist-fg">Filters</span>
+            <button
+              type="button"
+              aria-label="Close filters"
+              class="inline-flex size-7 items-center justify-center rounded-md border border-geist-border bg-geist-canvas text-geist-secondary hover:text-geist-fg"
+              @click="isMobileFiltersOpen = false"
+            >
+              <UIcon name="i-ph-x" class="size-4" />
+            </button>
+          </div>
+          <div class="flex-1 overflow-y-auto px-5 py-4">
+            <Filters />
+          </div>
+        </SlideoverContent>
+      </template>
     </USlideover>
 
     <!-- Minimal Vercel Footer -->
@@ -96,7 +99,7 @@
           <span>Curated React UI library comparison directory.</span>
         </div>
         <a
-          :href="appConfig.repoUrl"
+          :href="repoUrl"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 text-geist-secondary transition-colors hover:text-geist-fg"
@@ -117,7 +120,7 @@ const title = "react-ui-libs"
 const description =
   "Compare popular React UI libraries by styling, accessibility, components, and more. Pick the right UI library for your React or Next.js project."
 const siteUrl = getSiteUrl(useRuntimeConfig().public.siteUrl)
-const appConfig = useAppConfig()
+const { repoUrl } = useAppConfig()
 const totalCatalogComponents = useNbComponentsStore()
 const isMobileFiltersOpen = ref(false)
 
@@ -153,7 +156,7 @@ useHead({
       type: "image/svg+xml",
       href: "/favicon/logo.svg",
     },
-    ...(siteUrl ? [{ rel: "canonical", href: `${siteUrl}/` }] : []),
+    ...(siteUrl ? [{ rel: "canonical" as const, href: `${siteUrl}/` }] : []),
   ],
 })
 

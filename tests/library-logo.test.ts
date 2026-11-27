@@ -16,9 +16,10 @@ const compiled = compileScript(descriptor, {
   id: "library-logo-test",
   inlineTemplate: true,
 })
-const moduleSource = stripTypeScriptTypes(compiled.content, {
-  mode: "transform",
-}).replace(/from ["']vue["']/g, `from "${import.meta.resolve("vue")}"`)
+const moduleSource = stripTypeScriptTypes(compiled.content).replace(
+  /from ["']vue["']/g,
+  `from "${import.meta.resolve("vue")}"`
+)
 const { default: LibraryLogo } = await import(
   `data:text/javascript;base64,${Buffer.from(moduleSource).toString("base64")}`
 )
@@ -29,10 +30,10 @@ test("SSR includes both logo variants before the browser resolves its saved or s
     const images = html.match(/<img\b[^>]*>/g) || []
 
     assert.equal(images.length, 2, library.name)
-    assert.ok(images[0].includes(`src="/img/${library.logo}"`), library.name)
-    assert.ok(images[0].includes("dark:hidden"), library.name)
-    assert.ok(images[1].includes(`src="/img/${library.logoDark}"`), library.name)
-    assert.match(images[1], /class="hidden [^"]*dark:block"/, library.name)
+    assert.ok(images[0]?.includes(`src="/img/${library.logo}"`), library.name)
+    assert.ok(images[0]?.includes("dark:hidden"), library.name)
+    assert.ok(images[1]?.includes(`src="/img/${library.logoDark}"`), library.name)
+    assert.match(images[1] ?? "", /class="hidden [^"]*dark:block"/, library.name)
     for (const image of images) {
       assert.ok(image.includes(`alt="${library.name} logo"`), library.name)
     }

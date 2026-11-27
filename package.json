@@ -1,6 +1,7 @@
 {
   "name": "react-ui-libs",
   "private": true,
+  "packageManager": "pnpm@11.15.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --no-fork",
@@ -11,11 +12,12 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/ui": "^2.17.0",
+    "@nuxt/ui": "^4.13.1",
     "@types/node": "latest",
     "geist": "^1.9.2",
-    "nuxt": "^3.12.3",
+    "nuxt": "^4.7.0",
     "prettier": "latest",
-    "prettier-plugin-tailwindcss": "latest"
+    "prettier-plugin-tailwindcss": "latest",
+    "tailwindcss": "^4.3.5"
   }
 }

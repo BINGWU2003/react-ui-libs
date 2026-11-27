@@ -1,5 +1,5 @@
 <template>
-  <UTooltip :text="buttonFilter.help">
+  <UTooltip :text="buttonFilter.help" :content="{ side: 'top', sideOffset: 6 }">
     <span
       class="inline-flex cursor-default items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium leading-tight transition-colors"
       :class="

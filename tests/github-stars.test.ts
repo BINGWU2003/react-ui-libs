@@ -60,7 +60,7 @@ test("API rate limits, invalid data, and network errors fall back to GitHub's re
       "https://github.com/mui/material-ui",
     ])
 
-    const library = { ...libraries[1], nbStars: stars }
+    const library = { ...libraries[1]!, nbStars: stars }
     for (const minimum of [1000, 10000, stars]) {
       assert.ok(
         matchesLibraryFilters(library, [], {

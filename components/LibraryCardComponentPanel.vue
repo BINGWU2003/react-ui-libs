@@ -172,15 +172,16 @@
             </button>
           </div>
 
-          <label class="inline-flex shrink-0 cursor-pointer items-center gap-2 select-none">
-            <UToggle
+          <div class="inline-flex shrink-0 items-center select-none">
+            <USwitch
               v-model="showMissing"
               size="xs"
-              on-icon="i-heroicons-check-20-solid"
-              off-icon="i-heroicons-x-mark-20-solid"
+              checked-icon="i-heroicons-check-20-solid"
+              unchecked-icon="i-heroicons-x-mark-20-solid"
+              label="Show missing"
+              :ui="{ label: 'text-xs font-normal text-geist-secondary cursor-pointer' }"
             />
-            <span class="text-xs text-geist-secondary">Show missing</span>
-          </label>
+          </div>
         </div>
 
         <!-- Component Matrix -->
@@ -200,16 +201,18 @@
               <UTooltip
                 v-for="component in section.components"
                 :key="component.name"
-                class="block min-w-0"
+                :content="{ side: 'top', sideOffset: 6 }"
               >
-                <template #text>
-                  {{ component.help }}
-                  <div v-if="component.aliases" class="mt-1.5 opacity-80">
-                    Aliases: {{ component.aliases.join(", ") }}
+                <template #content>
+                  <div class="space-y-1">
+                    <div>{{ component.help }}</div>
+                    <div v-if="component.aliases" class="opacity-80">
+                      Aliases: {{ component.aliases.join(", ") }}
+                    </div>
                   </div>
                 </template>
                 <div
-                  class="flex cursor-default items-center gap-1.5 rounded-md border px-2 py-1.5 text-xs transition-colors"
+                  class="flex min-w-0 cursor-default items-center gap-1.5 rounded-md border px-2 py-1.5 text-xs transition-colors"
                   :class="
                     isFound(component)
                       ? 'border-geist-border bg-geist-canvas text-geist-fg'
@@ -247,7 +250,7 @@
 import { buttonFilters } from "@/data/filters"
 import { sections } from "@/data/sections"
 import type { Library } from "@/types/libraries.types"
-import type { Component } from "@/types/components.types"
+import type { CatalogComponent } from "@/types/components.types"
 import type { ButtonFilter } from "@/types/filters.types"
 
 const props = defineProps<{ library: Library }>()
@@ -271,7 +274,7 @@ onBeforeUnmount(() => {
   if (copyTimer) clearTimeout(copyTimer)
 })
 
-const isFound = (component: Component): boolean =>
+const isFound = (component: CatalogComponent): boolean =>
   props.library.componentMatchings.includes(component.name)
 
 const coveragePercent = computed(() =>
@@ -280,7 +283,7 @@ const coveragePercent = computed(() =>
 
 const matchedFilters = computed((): ButtonFilter[] =>
   props.library.filterMatchings
-    .map(({ id }) => findBy("id", id, buttonFilters))
+    .map(({ id }) => findBy<ButtonFilter>("id", id, buttonFilters))
     .filter((f): f is ButtonFilter => Boolean(f))
     .sort((a, b) => a.index - b.index)
 )

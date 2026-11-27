@@ -1,5 +1,5 @@
 <template>
-  <UTooltip :text="buttonFilter.help" :popper="{ placement: 'right' }" class="block w-full">
+  <UTooltip :text="buttonFilter.help" :content="{ side: 'right', sideOffset: 8 }">
     <button
       type="button"
       role="checkbox"

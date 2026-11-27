@@ -111,25 +111,25 @@ choosing one.
 
 ## Local development
 
-The website itself uses **Nuxt 3, Vue, Nuxt UI, and Tailwind CSS**. React libraries
+The website itself uses **Nuxt 4, Vue, Nuxt UI v4, and Tailwind CSS v4**. React libraries
 are catalog entries with links and metadata; they are not installed or rendered
 inside the application. No database is required.
 
-Use Node.js 22.6 or newer. The Dev Container includes Node.js 22.
+Use Node.js 22.6 or newer with pnpm. The Dev Container includes Node.js 22.
 
 ```sh
-npm ci
-npm run dev
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
 The development server normally runs at `http://localhost:3000`.
 
-| Command           | Purpose                      |
-| ----------------- | ---------------------------- |
-| `npm run dev`     | Start the development server |
-| `npm test`        | Run the test suite           |
-| `npm run build`   | Build for production         |
-| `npm run preview` | Preview the production build |
+| Command        | Purpose                      |
+| -------------- | ---------------------------- |
+| `pnpm dev`     | Start the development server |
+| `pnpm test`    | Run the test suite           |
+| `pnpm build`   | Build for production         |
+| `pnpm preview` | Preview the production build |
 
 ### Deployment URL
 
@@ -154,7 +154,7 @@ Use official documentation as the source, avoid duplicate component mappings, an
 do not infer library support merely from a third-party example. Record logo
 sources in [`public/img/README.md`](public/img/README.md).
 
-Run `npm test` and `npm run build` before submitting changes.
+Run `pnpm test` and `pnpm build` before submitting changes.
 
 ## Credits and license
 

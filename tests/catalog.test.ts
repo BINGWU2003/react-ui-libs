@@ -81,7 +81,7 @@ test("API failures and malformed metric values remain unknown, while zero is val
 })
 
 test("unknown metrics pass inactive filters and fail the corresponding active filters", () => {
-  const library = { ...libraries[0], nbStars: undefined, nbDownloads: undefined }
+  const library = { ...libraries[0]!, nbStars: undefined, nbDownloads: undefined }
   assert.ok(
     matchesLibraryFilters(library, [], { stars: 0, weeklyDownloads: 0, components: 0 })
   )
@@ -111,7 +111,7 @@ test("unknown metrics pass inactive filters and fail the corresponding active fi
 })
 
 test("feature and quantity filters combine with AND and include exact minimums", () => {
-  const library = { ...libraries[0], nbStars: 1000, nbDownloads: 5000 }
+  const library = { ...libraries[0]!, nbStars: 1000, nbDownloads: 5000 }
   const minimums = {
     stars: 1000,
     weeklyDownloads: 5000,
@@ -173,9 +173,9 @@ test("search matches library names, dependencies, packages, components, aliases,
 })
 
 test("sorting handles stars, downloads, components, and pushes unknown metrics last", () => {
-  const a = { ...libraries[0], name: "A", nbStars: 1000, nbDownloads: undefined }
-  const b = { ...libraries[1], name: "B", nbStars: undefined, nbDownloads: 500_000 }
-  const c = { ...libraries[2], name: "C", nbStars: 5000, nbDownloads: 100_000 }
+  const a = { ...libraries[0]!, name: "A", nbStars: 1000, nbDownloads: undefined }
+  const b = { ...libraries[1]!, name: "B", nbStars: undefined, nbDownloads: 500_000 }
+  const c = { ...libraries[2]!, name: "C", nbStars: 5000, nbDownloads: 100_000 }
 
   assert.deepEqual(
     sortLibraries([a, b, c], "default").map((l) => l.name),
@@ -192,8 +192,8 @@ test("sorting handles stars, downloads, components, and pushes unknown metrics l
   const byComponents = sortLibraries(libraries, "components")
   for (let i = 1; i < byComponents.length; i++) {
     assert.ok(
-      byComponents[i - 1].componentMatchings.length >=
-        byComponents[i].componentMatchings.length
+      byComponents[i - 1]!.componentMatchings.length >=
+        byComponents[i]!.componentMatchings.length
     )
   }
 })
@@ -205,8 +205,8 @@ test("card badge selection promotes active filters to the front and reports over
   assert.equal(defaultBadges.hiddenCount, antd.filterMatchings.length - 4)
 
   const activeBadges = selectCardBadges(antd, buttonFilters, ["FRTLSupport", "FFigma"], 4)
-  assert.equal(activeBadges.visible[0].id, "FFigma")
-  assert.equal(activeBadges.visible[1].id, "FRTLSupport")
+  assert.equal(activeBadges.visible[0]?.id, "FFigma")
+  assert.equal(activeBadges.visible[1]?.id, "FRTLSupport")
   assert.ok(activeBadges.activeSet.has("FRTLSupport"))
 })
 

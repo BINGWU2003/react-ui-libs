@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <UTooltip :text="`Visit ${library.name} website`">
+        <UTooltip :text="`Visit ${library.name} website`" :content="{ side: 'top', sideOffset: 6 }">
           <a
             :href="library.url"
             target="_blank"
@@ -81,6 +81,7 @@
         <UTooltip
           v-if="repoUrl && library.nbStars !== undefined"
           :text="`Repository stars: ${library.repoOwner}/${library.repoName}. Monorepo totals may include other packages.`"
+          :content="{ side: 'top', sideOffset: 6 }"
         >
           <a
             :href="repoUrl"
@@ -102,6 +103,7 @@
         <UTooltip
           v-if="registryUrl && library.nbDownloads !== undefined"
           :text="`Weekly npm downloads: ${library.package}. ${library.packageNote || 'Other packages are not included.'}`"
+          :content="{ side: 'top', sideOffset: 6 }"
         >
           <a
             :href="registryUrl"

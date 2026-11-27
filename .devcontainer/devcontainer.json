@@ -8,7 +8,7 @@
       "onAutoForward": "notify"
     }
   },
-  "onCreateCommand": "npm install",
+  "onCreateCommand": "corepack enable && pnpm install",
   "features": {
     "ghcr.io/ddahan/feature-starter/custom_bashrc:latest": {}
   },

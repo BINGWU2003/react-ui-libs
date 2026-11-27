@@ -5,7 +5,7 @@ export const buttonFilters = [
     label: "Styled",
     icon: "i-tabler-palette",
     help: "Styled components come with opinionated style. You usually customize them by overriding these styles.",
-    autoDisable: "FUnstyled",
+    autoDisable: "FUnstyled" as const,
   },
   {
     id: "FUnstyled" as const,
@@ -13,7 +13,7 @@ export const buttonFilters = [
     label: "Unstyled",
     icon: "i-tabler-palette-off",
     help: "Unstyled components come with no style and force you to write your own.",
-    autoDisable: "FStyled",
+    autoDisable: "FStyled" as const,
   },
   {
     id: "FImported" as const,
@@ -21,7 +21,7 @@ export const buttonFilters = [
     label: "Package",
     icon: "i-mdi-import",
     help: "Import React components from an npm package. Upgrade the package to receive updates, and customize components through its supported APIs and styling options.",
-    autoDisable: "FPasted",
+    autoDisable: "FPasted" as const,
   },
   {
     id: "FPasted" as const,
@@ -29,7 +29,7 @@ export const buttonFilters = [
     label: "Paste",
     icon: "i-mdi-content-paste",
     help: "Add component source code to your project, manually or with a CLI. You own and edit the source, but may still need npm dependencies. Upstream component changes must be reviewed and applied yourself.",
-    autoDisable: "FImported",
+    autoDisable: "FImported" as const,
   },
   {
     id: "FTailwind" as const,

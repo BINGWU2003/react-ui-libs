@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-2 py-1">
     <div class="flex items-center justify-between gap-2">
-      <UTooltip :text="rangeFilter.help" :popper="{ placement: 'right' }">
+      <UTooltip :text="rangeFilter.help" :content="{ side: 'right', sideOffset: 8 }">
         <span
           class="inline-flex cursor-default items-center gap-1.5 text-[13px] text-geist-secondary"
         >
@@ -146,7 +146,7 @@ const accessibleLabel = computed(() => {
 const trackStyle = computed(() => {
   const pct = Math.min(100, Math.max(0, (currentValue.value / rangeFilter.rangeMax) * 100))
   return {
-    background: `linear-gradient(to right, rgb(var(--ds-fg-primary)) 0%, rgb(var(--ds-fg-primary)) ${pct}%, transparent ${pct}%)`,
+    background: `linear-gradient(to right, var(--ds-fg-primary) 0%, var(--ds-fg-primary) ${pct}%, transparent ${pct}%)`,
     backgroundSize: "100% 3px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",

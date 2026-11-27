@@ -147,16 +147,20 @@
 
     <!-- Shared Library Detail Slideover -->
     <USlideover
-      v-model="isDetailOpen"
+      v-model:open="isDetailOpen"
       side="right"
-      :ui="{ width: 'w-screen max-w-full sm:max-w-xl md:max-w-2xl' }"
+      :title="selectedLibrary ? `${selectedLibrary.name} details` : 'Library details'"
+      description="Capabilities and component coverage matrix"
+      :ui="{ content: 'w-screen max-w-full sm:max-w-xl md:max-w-2xl' }"
     >
-      <SlideoverContent v-if="selectedLibrary">
-        <LibraryCardComponentPanel
-          :library="selectedLibrary"
-          @close="isDetailOpen = false"
-        />
-      </SlideoverContent>
+      <template #content>
+        <SlideoverContent v-if="selectedLibrary">
+          <LibraryCardComponentPanel
+            :library="selectedLibrary"
+            @close="isDetailOpen = false"
+          />
+        </SlideoverContent>
+      </template>
     </USlideover>
   </div>
 </template>
