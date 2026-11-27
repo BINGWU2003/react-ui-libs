@@ -1,4 +1,11 @@
-let initialButtonFiltering: { [K in ButtonFilterID]: { selected: boolean } } = {
+import { type ButtonFilterID, type RangeFilterID } from "@/types/filters.types"
+import { buttonFilters } from "@/data/filters"
+import { sections } from "@/data/sections"
+import type { FilterQueryState, SortOption } from "@/utils/catalog"
+
+const createInitialButtonFiltering = (): {
+  [K in ButtonFilterID]: { selected: boolean }
+} => ({
   FStyled: { selected: false },
   FUnstyled: { selected: false },
   FImported: { selected: false },
@@ -15,96 +22,135 @@ let initialButtonFiltering: { [K in ButtonFilterID]: { selected: boolean } } = {
   FThemeGenerator: { selected: false },
   FSemanticColors: { selected: false },
   FForm: { selected: false },
-}
+})
 
-let initialRangeFiltering: { [K in RangeFilterID]: { qty: number } } = {
+const createInitialRangeFiltering = (): { [K in RangeFilterID]: { qty: number } } => ({
   FNbStars: { qty: 0 },
   FNbDownloads: { qty: 0 },
   FNbComponents: { qty: 0 },
-}
-
-import { type ButtonFilterID, type RangeFilterID } from "@/types/filters.types"
-import { buttonFilters } from "@/data/filters"
+})
 
 export const useFilterStore = () => {
-  const buttonFiltering = useState("buttonFilterStore", () => initialButtonFiltering)
-  const rangeFiltering = useState("rangeFilterStore", () => initialRangeFiltering)
+  const buttonFiltering = useState("buttonFilterStore", createInitialButtonFiltering)
+  const rangeFiltering = useState("rangeFilterStore", createInitialRangeFiltering)
+  const searchQuery = useState<string>("searchQueryStore", () => "")
+  const sortBy = useState<SortOption>("sortByStore", () => "default")
 
-  // run when a filter button is clicked
   const invertButtonFiltering = (filterID: ButtonFilterID) => {
-    // 1 - invert the filter selected state
     const oldSelected = buttonFiltering.value[filterID].selected
     buttonFiltering.value[filterID].selected = !oldSelected
 
-    // 2 - some filters can auto-disable already selected filters
-    // (eg. selected `Styled` will auto disable `Unstyled`)
-    const autoDisable = <ButtonFilterID>findBy("id", filterID, buttonFilters)!.autoDisable
-    if (oldSelected === false && !!autoDisable) {
+    const autoDisable = <ButtonFilterID | undefined>(
+      findBy("id", filterID, buttonFilters)?.autoDisable
+    )
+    if (oldSelected === false && autoDisable) {
       buttonFiltering.value[autoDisable].selected = false
     }
   }
 
-  // run when a range is changed
+  const removeButtonFilter = (filterID: ButtonFilterID) => {
+    buttonFiltering.value[filterID].selected = false
+  }
+
   const changeRangeFiltering = (rangeFilterID: RangeFilterID, qty: number) => {
     rangeFiltering.value[rangeFilterID].qty = qty
   }
 
-  const touchedButtonFilterIDs = () => <ButtonFilterID[]>Object.entries(
-      buttonFiltering.value
-    )
-      // NOTE: <FilterID[]> allows a more accurate type inference
-      .filter(([_, value]) => value.selected === true)
-      .map(([key, _]) => key)
+  const resetRangeFilter = (rangeFilterID: RangeFilterID) => {
+    rangeFiltering.value[rangeFilterID].qty = 0
+  }
 
-  const touchedRangeFilterIDs = () => <RangeFilterID[]>Object.entries(
-      rangeFiltering.value
+  const setSearchQuery = (value: string) => {
+    searchQuery.value = value
+  }
+
+  const setSortBy = (value: SortOption) => {
+    sortBy.value = value
+  }
+
+  const touchedButtonFilterIDs = () =>
+    <ButtonFilterID[]>(
+      Object.entries(buttonFiltering.value)
+        .filter(([_, value]) => value.selected === true)
+        .map(([key, _]) => key)
     )
-      .filter(([_, value]) => value.qty > 0)
-      .map(([key, _]) => key)
+
+  const touchedRangeFilterIDs = () =>
+    <RangeFilterID[]>(
+      Object.entries(rangeFiltering.value)
+        .filter(([_, value]) => value.qty > 0)
+        .map(([key, _]) => key)
+    )
 
   const nbTouchedFilters = () =>
     touchedButtonFilterIDs().length + touchedRangeFilterIDs().length
 
+  const hasActiveCriteria = () =>
+    nbTouchedFilters() > 0 || searchQuery.value.trim().length > 0
+
   const clearFiltering = () => {
-    // NOTE: <ButtonFilterID[]> allows a more accurate type inference
-    for (let filterID of <ButtonFilterID[]>Object.keys(buttonFiltering.value)) {
+    for (const filterID of <ButtonFilterID[]>Object.keys(buttonFiltering.value)) {
       buttonFiltering.value[filterID].selected = false
     }
 
-    for (let rangeFilterID of <RangeFilterID[]>Object.keys(rangeFiltering.value)) {
+    for (const rangeFilterID of <RangeFilterID[]>Object.keys(rangeFiltering.value)) {
       rangeFiltering.value[rangeFilterID].qty = 0
     }
+
+    searchQuery.value = ""
   }
+
+  const applyQueryState = (state: FilterQueryState) => {
+    for (const filterID of <ButtonFilterID[]>Object.keys(buttonFiltering.value)) {
+      buttonFiltering.value[filterID].selected = state.features.includes(filterID)
+    }
+    rangeFiltering.value.FNbStars.qty = state.stars
+    rangeFiltering.value.FNbDownloads.qty = state.downloads
+    rangeFiltering.value.FNbComponents.qty = state.components
+    searchQuery.value = state.search
+    sortBy.value = state.sort
+  }
+
+  const getQueryState = (): FilterQueryState => ({
+    search: searchQuery.value,
+    sort: sortBy.value,
+    features: touchedButtonFilterIDs(),
+    stars: rangeFiltering.value.FNbStars.qty,
+    downloads: rangeFiltering.value.FNbDownloads.qty,
+    components: rangeFiltering.value.FNbComponents.qty,
+  })
 
   return {
     buttonFiltering,
     rangeFiltering,
+    searchQuery,
+    sortBy,
     invertButtonFiltering,
+    removeButtonFilter,
     changeRangeFiltering,
+    resetRangeFilter,
+    setSearchQuery,
+    setSortBy,
     touchedButtonFilterIDs,
+    touchedRangeFilterIDs,
     nbTouchedFilters,
+    hasActiveCriteria,
     clearFiltering,
+    applyQueryState,
+    getQueryState,
   }
 }
 
-// ---------------------------------------------------------------------------------------
-
-import { sections } from "@/data/sections"
 export const useNbComponentsStore = () => {
-  /* Return the number of potential existing components. useful to compute the availability score  */
-  let componentCount = sections.reduce((count, section) => {
+  const componentCount = sections.reduce((count, section) => {
     return count + section.components.length
   }, 0)
   return useState("nbComponentsStore", () => componentCount)
 }
 
-// ---------------------------------------------------------------------------------------
-
 export const useShowMissingStore = () => {
-  /* Show all components, even the missing ones, on a library detail */
   const showMissing = useState("showMissingStore", () => true)
 
-  /* Toggle */
   const invertMissing = () => {
     showMissing.value = !showMissing.value
   }

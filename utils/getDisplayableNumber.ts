@@ -1,3 +1,9 @@
-// round to the first decimal if the number is higher than 1000
-export const getDisplayableNumber = (number: number): string =>
-  number >= 1000 ? `${Math.round(number / 100) / 10}k` : `${number}`
+export const getDisplayableNumber = (number: number): string => {
+  if (number >= 1_000_000) {
+    return `${Math.round(number / 100_000) / 10}M`
+  }
+  if (number >= 1_000) {
+    return `${Math.round(number / 100) / 10}k`
+  }
+  return `${number}`
+}

@@ -4,14 +4,14 @@
     <img
       :src="`/img/${library.logo}`"
       :alt="`${library.name} logo`"
-      class="h-full w-full object-contain drop-shadow-lg"
+      class="h-full w-full object-contain"
       :class="{ 'dark:hidden': library.logoDark }"
     />
     <img
       v-if="library.logoDark"
       :src="`/img/${library.logoDark}`"
       :alt="`${library.name} logo`"
-      class="hidden h-full w-full object-contain drop-shadow-lg dark:block"
+      class="hidden h-full w-full object-contain dark:block"
     />
   </span>
 </template>

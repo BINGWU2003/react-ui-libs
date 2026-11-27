@@ -1,19 +1,20 @@
 <template>
-  <div>
-    <a
-      class="flex h-7 items-center justify-between rounded-t-md bg-shadcn-primary px-2 text-sm font-bold text-shadcn-primary-foreground hover:bg-shadcn-primary/90"
-      :href="promo.url"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div></div>
-      <div class="flex items-center justify-center gap-x-1.5">
-        <UIcon class="text-lg" v-if="promo.icon" :name="promo.icon"></UIcon>
-        <div>{{ promo.text }}</div>
-      </div>
-      <UIcon class="text-lg" name="ph:arrow-right-bold"></UIcon>
-    </a>
-  </div>
+  <a
+    class="group/promo flex items-center justify-between gap-2 rounded-t-[11px] border-b border-geist-border bg-geist-subtle/80 px-4 py-1.5 text-xs font-medium text-geist-fg transition-colors hover:bg-geist-hover"
+    :href="promo.url"
+    target="_blank"
+    rel="noopener noreferrer"
+    @click.stop
+  >
+    <span class="flex min-w-0 items-center gap-1.5">
+      <UIcon v-if="promo.icon" :name="promo.icon" class="size-3.5 shrink-0 text-geist-secondary" />
+      <span class="truncate">{{ promo.text }}</span>
+    </span>
+    <UIcon
+      name="i-ph-arrow-up-right"
+      class="size-3.5 shrink-0 text-geist-muted transition-transform duration-150 group-hover/promo:-translate-y-0.5 group-hover/promo:translate-x-0.5 group-hover/promo:text-geist-fg"
+    />
+  </a>
 </template>
 
 <script setup lang="ts">

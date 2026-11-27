@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto p-4 md:p-6">
+  <div class="flex h-full flex-col overflow-hidden bg-geist-surface text-geist-fg">
     <slot />
   </div>
 </template>

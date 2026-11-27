@@ -12,8 +12,9 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.17.0",
-    "nuxt": "^3.12.3",
     "@types/node": "latest",
+    "geist": "^1.9.2",
+    "nuxt": "^3.12.3",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "latest"
   }
